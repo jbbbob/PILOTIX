@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Verrou de confidentialité : la page n'a le droit de contacter AUCUN serveur (connect-src 'none'),
+     et ne charge que ses propres fichiers. Les données du fichier Excel restent dans le navigateur. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Pilotage Victor</title>
+<link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand">
+      <span class="logo">PV</span>
+      <h1>Pilotage Victor</h1>
+    </div>
+    <div class="top-right">
+      <span class="lock" title="La page n'envoie rien sur Internet et n'enregistre rien. Fermer l'onglet efface tout.">🔒 Rien n'est envoyé ni enregistré</span>
+      <span id="fname" class="fname"></span>
+      <button id="theme" class="ghost" type="button" aria-label="Thème clair ou sombre">◐</button>
+    </div>
+  </header>
+
+  <div id="body" class="body solo">
+    <nav id="tabs" class="rail" role="tablist" hidden>
+      <button data-tab="preparer"><span class="ic">✎</span>Préparer le fichier</button>
+      <button data-tab="dash" class="on"><span class="ic">▦</span>Tableau de bord</button>
+      <button data-tab="equipe2"><span class="ic">↗</span><span class="t2">Équipe 2</span></button>
+      <button data-tab="lignes"><span class="ic">☰</span>Lignes</button>
+      <div class="foot"><button data-tab="qualite"><span class="ic">⚙</span>Colonnes &amp; contrôles</button></div>
+    </nav>
+
+    <main>
+      <section id="drop" class="drop">
+        <input id="file" type="file" accept=".xlsx,.xlsm,.xls,.csv" hidden>
+        <div class="drop-icon">⬇</div>
+        <p><strong>Glisse le fichier Excel ici</strong> ou <button id="pick" type="button" class="linkbtn">choisis-le</button></p>
+        <p class="muted">Le fichier est lu sur ton PC. Il n'est envoyé nulle part.</p>
+      </section>
+
+      <section id="app" hidden>
+        <div class="filebar">
+          <div id="sheets" class="sheets" role="tablist" aria-label="Onglets du fichier"></div>
+          <label class="ref">Au <input id="refdate" type="date"></label>
+          <button id="close" type="button" class="ghost">Fermer le fichier</button>
+        </div>
+        <div id="view"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div id="tip" class="tip" hidden></div>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="app.js?v=6"></script>
+</body>
+</html>
